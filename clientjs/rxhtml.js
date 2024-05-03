@@ -3654,6 +3654,12 @@ var RxHTML = (function () {
   transforms['is_not_empty_str'] = function(x) { return x != ""; };
   transforms['jsonify'] = function(x) { return JSON.stringify(x); };
   transforms['time_now'] = function(x) { return Date.now() + ""; };
+  transforms['linkify'] = function(x) {
+    return x.replace(/(https?:\/\/[^\s]+)/g, function(match) {
+        return `<a href="${match}">${match}</a>`;
+    });
+};
+
   transforms['size_bytes'] = function(xraw) {
     var x = 0.0;
     if (typeof(xraw) == 'number') {
